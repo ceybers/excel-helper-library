@@ -1,2 +1,6 @@
 # excel-helper-library
-My collection of Excel Helpers
+This is my humble collection of Excel Helpers.
+There are many like it, but this one is mine. 
+
+# Notes
+- [MVVM](MVVM/MVVM.md)
