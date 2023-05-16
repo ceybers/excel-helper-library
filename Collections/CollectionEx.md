@@ -82,5 +82,7 @@ Public Sub DebugPrint()
 ```
 Loops through each Item in the Collection, printing out the Index and the Item into the Immediate Window.
 
+---
+
 Notes: Could create a similar method that accepts a predicate interface, which would let us filter the collection and perform the method conditionally.
 
