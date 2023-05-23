@@ -1,4 +1,12 @@
-# CollectionEx methods
+# CollectionEx Interface
+- Attempt at creating a generic interface for Collections, Dictionaries, and Arrays.
+- Not sure what I want to actually name it yet.
+- Need to decide how to handle situations where there are no Keys (Arrays), or we can't get a list of the Keys (Collections).
+- Using the C# IList interface as inspiration
+  - See also: https://learn.microsoft.com/en-us/dotnet/api/system.collections.ilist?view=net-7.0
+- Implementing the C# style Try-pattern with out parameter
+
+# CollectionEx methods (old, to clean up)
 ## From
 ```vb
 Public Function From(ByVal Collection As Collection) As CollectionEx
