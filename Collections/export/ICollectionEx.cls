@@ -66,3 +66,9 @@ End Sub
 
 Public Function ToArray() As Variant
 End Function
+
+Public Function ToCollection() As Collection
+End Function
+
+Public Function ToDictionary() As Scripting.Dictionary
+End Function

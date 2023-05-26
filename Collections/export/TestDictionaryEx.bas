@@ -47,6 +47,18 @@ Public Sub DoTestDictionaryEx()
     Debug.Assert LBound(outArray) = 0
     Debug.Assert UBound(outArray) = 3
     Debug.Print "ToArray() OK"
+        
+    Dim outCollection As Collection
+    Set outCollection = DictionaryEx.From(dict).ToCollection
+    Debug.Assert TypeName(outCollection) = "Collection"
+    Debug.Assert outCollection.Count = 4
+    Debug.Print "ToCollection() OK"
+    
+    Dim outDictionary As Scripting.Dictionary
+    Set outDictionary = DictionaryEx.From(dict).ToDictionary
+    Debug.Assert TypeName(outDictionary) = "Dictionary"
+    Debug.Assert outDictionary.Count = 4
+    Debug.Print "ToDictionary() OK"
     
     Debug.Assert DictionaryEx.From(dict).Count = 4
     DictionaryEx.From(dict).Clear

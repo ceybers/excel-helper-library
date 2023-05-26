@@ -193,3 +193,25 @@ End Function
 Private Function ICollectionEx_ToArray() As Variant
     ICollectionEx_ToArray = This.Array
 End Function
+
+Private Function ICollectionEx_ToCollection() As Collection
+    Dim Result As Collection
+    Set Result = New Collection
+    
+    Dim i As Long
+    For i = LBound(This.Array) To UBound(This.Array)
+        Result.Add Key:="I" & i, Item:=This.Array(i)
+    Next i
+    Set ICollectionEx_ToCollection = Result
+End Function
+
+Private Function ICollectionEx_ToDictionary() As Scripting.Dictionary
+    Dim Result As Scripting.Dictionary
+    Set Result = New Scripting.Dictionary
+    
+    Dim i As Long
+    For i = LBound(This.Array) To UBound(This.Array)
+        Result.Add Key:="I" & i, Item:=This.Array(i)
+    Next i
+    Set ICollectionEx_ToDictionary = Result
+End Function

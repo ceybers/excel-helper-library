@@ -39,6 +39,23 @@ Public Sub DoTestArrayEx()
     'Debug.Print "GetByIndex() OK"
     'Debug.Print "TryInsert() OK"
     
+    Dim outArray As Variant
+    outArray = ArrayEx.From(arr).ToArray
+    Debug.Assert TypeName(outArray) = "Variant()"
+    Debug.Print "ToArray() OK"
+    
+    Dim outCollection As Collection
+    Set outCollection = ArrayEx.From(arr).ToCollection
+    Debug.Assert TypeName(outCollection) = "Collection"
+    Debug.Assert outCollection.Count = 3
+    Debug.Print "ToCollection() OK"
+    
+    Dim outDictionary As Scripting.Dictionary
+    Set outDictionary = ArrayEx.From(arr).ToDictionary
+    Debug.Assert TypeName(outDictionary) = "Dictionary"
+    Debug.Assert outDictionary.Count = 3
+    Debug.Print "ToDictionary() OK"
+    
     With ArrayEx.From(arr)
         Debug.Assert .Count = 3
         .Clear
@@ -48,12 +65,6 @@ Public Sub DoTestArrayEx()
     Debug.Print "Count() OK"
     
     Debug.Print "Asserts passed."
-    
-    Dim outArray As Variant
-    outArray = ArrayEx.From(arr).ToArray
-    Debug.Assert TypeName(outArray) = "Variant()" 'Variant/Variant(0 to 2)
-    ' each element is Variant/String
-    Stop
 End Sub
 
 

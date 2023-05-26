@@ -197,3 +197,18 @@ End Function
 Private Function ICollectionEx_ToArray() As Variant
     ICollectionEx_ToArray = This.Dictionary.Items
 End Function
+
+Private Function ICollectionEx_ToCollection() As Collection
+    Dim Result As Collection
+    Set Result = New Collection
+    
+    Dim i As Long
+    For i = 0 To (This.Dictionary.Count - 1)
+        Result.Add This.Dictionary.Keys(i), This.Dictionary.Items(i)
+    Next i
+    Set ICollectionEx_ToCollection = Result
+End Function
+
+Private Function ICollectionEx_ToDictionary() As Scripting.Dictionary
+    Set ICollectionEx_ToDictionary = This.Dictionary
+End Function

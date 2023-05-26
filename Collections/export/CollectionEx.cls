@@ -220,3 +220,19 @@ Private Function ICollectionEx_ToArray() As Variant
     
     ICollectionEx_ToArray = Result
 End Function
+
+Private Function ICollectionEx_ToCollection() As Collection
+    Set ICollectionEx_ToCollection = This.Collection
+End Function
+
+Private Function ICollectionEx_ToDictionary() As Scripting.Dictionary
+    Dim Result As Scripting.Dictionary
+    Set Result = New Scripting.Dictionary
+    
+    Dim i As Long
+    For i = 1 To This.Collection.Count
+        Result.Add Key:="I" & i, Item:=This.Collection.Item(i)
+    Next i
+    
+    Set ICollectionEx_ToDictionary = Result
+End Function
