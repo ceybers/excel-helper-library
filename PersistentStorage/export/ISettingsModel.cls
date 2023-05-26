@@ -11,6 +11,11 @@ Attribute VB_Exposed = False
 '@Folder "PersistentStorage.Abstract"
 Option Explicit
 
+'@Description "Gets the Settings object for the user-level settings."
+Public Function User() As ISettings
+Attribute User.VB_Description = "Gets the Settings object for the user-level settings."
+End Function
+
 '@Description "Gets the Settings object for the workbook-level settings."
 Public Function Workbook() As ISettings
 Attribute Workbook.VB_Description = "Gets the Settings object for the workbook-level settings."

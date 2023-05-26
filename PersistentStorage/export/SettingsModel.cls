@@ -2,13 +2,13 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "XMLSettingsModel"
+Attribute VB_Name = "SettingsModel"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 '@PredeclaredId
-'@Folder "PersistentStorage.XMLSettings"
+'@Folder "PersistentStorage"
 Option Explicit
 Implements ISettingsModel
 
@@ -19,6 +19,7 @@ Private Const TABLE_NODE As String = "Table"
 Private Type TState
     RootNode As String
     Workbook As Workbook
+    UserSettings As ISettings
     WorkbookSettings As ISettings
     TableSettings As Collection ' of type SomeSettings
 End Type
@@ -31,6 +32,10 @@ End Property
 Public Property Let RootNode(ByVal vNewValue As String)
     This.RootNode = vNewValue
 End Property
+
+Private Function ISettingsModel_User() As ISettings
+    Set ISettingsModel_User = This.UserSettings
+End Function
 
 Public Property Get Workbook() As Workbook
     Set Workbook = This.Workbook
@@ -45,17 +50,22 @@ Private Sub Class_Initialize()
 End Sub
 
 '@Description "Creates a new XMLSettingsModel for the given Workbook and RootNode."
-Public Function Create(ByVal Workbook As Workbook, ByVal RootNode As String) As XMLSettingsModel
+Public Function Create(ByVal Workbook As Workbook, ByVal RootNode As String) As ISettingsModel
 Attribute Create.VB_Description = "Creates a new XMLSettingsModel for the given Workbook and RootNode."
-    Set Create = New XMLSettingsModel
-    Create.RootNode = RootNode
-    Create.Load Workbook
+    Dim Result As SettingsModel
+    Set Result = New SettingsModel
+    With Result
+        .RootNode = RootNode
+        .Load Workbook
+    End With
+    Set Create = Result
 End Function
 
 '@Description "Loads the Workbook settings and any Table settings from the Workbook's CustomXMLPart."
 Public Sub Load(ByVal Workbook As Workbook)
 Attribute Load.VB_Description = "Loads the Workbook settings and any Table settings from the Workbook's CustomXMLPart."
     Set This.Workbook = Workbook
+    Set This.UserSettings = New MyDocSettings
     
     AddWorkbookSettings
         

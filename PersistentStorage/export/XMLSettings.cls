@@ -20,7 +20,7 @@ Private Const TRUE_SYMBOL As String = "TRUE"
 Private Const FALSE_SYMBOL As String = "FALSE"
 
 Private Type TState
-    Parent As XMLSettingsModel
+    Parent As SettingsModel
     XPathPrefix As String
 End Type
 Private This As TState
@@ -39,7 +39,7 @@ Public Property Let XPathPrefix(ByVal vNewValue As String)
     This.XPathPrefix = vNewValue
 End Property
 
-Public Sub SetParent(ByVal Parent As XMLSettingsModel)
+Public Sub SetParent(ByVal Parent As ISettingsModel)
     Set This.Parent = Parent
 End Sub
 
