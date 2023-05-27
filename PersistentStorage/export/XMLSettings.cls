@@ -5,8 +5,9 @@ END
 Attribute VB_Name = "XMLSettings"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
-Attribute VB_PredeclaredId = False
+Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'@PredeclaredId
 '@Folder "PersistentStorage.XMLSettings"
 Option Explicit
 Implements ISettings
@@ -20,17 +21,12 @@ Private Const TRUE_SYMBOL As String = "TRUE"
 Private Const FALSE_SYMBOL As String = "FALSE"
 
 Private Type TState
-    Parent As SettingsModel
+    Workbook As Workbook
     XPathPrefix As String
 End Type
 Private This As TState
 
-Private Property Get CustomXMLPart() As CustomXMLPart
-    Debug.Assert Not This.Parent Is Nothing
-    Debug.Assert Not This.Parent.CustomXMLPart Is Nothing
-    Set CustomXMLPart = This.Parent.CustomXMLPart
-End Property
-
+' ---
 Public Property Get XPathPrefix() As String
     XPathPrefix = This.XPathPrefix
 End Property
@@ -39,16 +35,21 @@ Public Property Let XPathPrefix(ByVal vNewValue As String)
     This.XPathPrefix = vNewValue
 End Property
 
-Public Sub SetParent(ByVal Parent As ISettingsModel)
-    Set This.Parent = Parent
-End Sub
+Public Property Get Workbook() As Workbook
+    Set Workbook = This.Workbook
+End Property
 
+Public Property Set Workbook(ByVal vNewValue As Workbook)
+    Set This.Workbook = vNewValue
+End Property
+
+' ---
 Private Function ISettings_GetFlag(ByVal FlagName As String) As Boolean
     Dim XPath As String
     XPath = XPathPrefix & "/" & FLAGS_NODE & "/" & FlagName
     
     Dim Result As CustomXMLNode
-    Set Result = CustomXMLPart.SelectSingleNode(XPath)
+    Set Result = GetCustomXMLPart.SelectSingleNode(XPath)
     
     If Not Result Is Nothing Then
         Select Case UCase$(Result.Text)
@@ -66,7 +67,7 @@ Private Sub ISettings_SetFlag(ByVal FlagName As String, ByVal Value As Boolean)
     Dim XPath As String
     XPath = XPathPrefix & "/" & FLAGS_NODE & "/" & FlagName
     
-    UpsertText CustomXMLPart, XPath, IIf(Value, TRUE_SYMBOL, FALSE_SYMBOL)
+    UpsertText GetCustomXMLPart, XPath, IIf(Value, TRUE_SYMBOL, FALSE_SYMBOL)
 End Sub
 
 Private Function ISettings_GetSetting(ByVal SettingName As String) As String
@@ -74,7 +75,7 @@ Private Function ISettings_GetSetting(ByVal SettingName As String) As String
     XPath = XPathPrefix & "/" & SETTINGS_NODE & "/" & SettingName
     
     Dim Result As CustomXMLNode
-    Set Result = CustomXMLPart.SelectSingleNode(XPath)
+    Set Result = GetCustomXMLPart.SelectSingleNode(XPath)
     
     If Not Result Is Nothing Then
         ISettings_GetSetting = Result.Text
@@ -85,7 +86,7 @@ Private Sub ISettings_SetSetting(ByVal SettingName As String, ByVal Value As Str
     Dim XPath As String
     XPath = XPathPrefix & "/" & SETTINGS_NODE & "/" & SettingName
     
-    UpsertText CustomXMLPart, XPath, Value
+    UpsertText GetCustomXMLPart, XPath, Value
 End Sub
 
 Private Function ISettings_GetCollection(ByVal CollectionName As String) As Collection
@@ -95,7 +96,7 @@ Private Function ISettings_GetCollection(ByVal CollectionName As String) As Coll
     XPath = XPathPrefix & "/" & COLLECTIONS_NODE & "/" & COLLECTION_NODE & "[@Name='" & CollectionName & "']/" & ITEM_NODE
     
     Dim Results As CustomXMLNodes
-    Set Results = CustomXMLPart.SelectNodes(XPath)
+    Set Results = GetCustomXMLPart.SelectNodes(XPath)
     
     If Not Results Is Nothing Then
         Dim Item As CustomXMLNode
@@ -109,5 +110,50 @@ Private Sub ISettings_SetCollection(ByVal CollectionName As String, ByVal Collec
     Dim XPath As String
     XPath = XPathPrefix & "/" & COLLECTIONS_NODE & "/" & COLLECTION_NODE & "[@Name='" & CollectionName & "']"
     
-    UpsertCollection CustomXMLPart, XPath, Collection
+    UpsertCollection GetCustomXMLPart, XPath, Collection
 End Sub
+
+Private Sub ISettings_Reset()
+    GetCustomXMLPart.Delete
+End Sub
+
+' ---
+Public Function Create(ByVal Workbook As Workbook, ByVal XPathPrefix As String) As ISettings
+    Dim Result As XMLSettings
+    Set Result = New XMLSettings
+    
+    With Result
+        Set .Workbook = Workbook
+        .XPathPrefix = XPathPrefix
+        .Load
+    End With
+    
+    Set Create = Result
+End Function
+
+Public Sub Load()
+End Sub
+
+
+Private Property Get RootNode() As String
+    RootNode = Mid$(This.XPathPrefix, 2, InStr(2, This.XPathPrefix, "/") - 2)
+End Property
+
+Public Sub DebugPrint()
+    Debug.Print GetCustomXMLPart.XML
+End Sub
+
+Private Function GetCustomXMLPart() As CustomXMLPart
+    Dim Result As CustomXMLNode
+    Dim CustomXMLPart As CustomXMLPart
+    For Each CustomXMLPart In Workbook.CustomXMLParts
+        Set Result = CustomXMLPart.SelectSingleNode("/" & RootNode)
+        If Not Result Is Nothing Then
+            Set GetCustomXMLPart = CustomXMLPart
+            Exit Function
+        End If
+    Next CustomXMLPart
+
+    Workbook.CustomXMLParts.Add "<" & RootNode & "/>"
+    Set GetCustomXMLPart = Workbook.CustomXMLParts.Item(Workbook.CustomXMLParts.Count)
+End Function
