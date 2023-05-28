@@ -1,5 +1,5 @@
 Attribute VB_Name = "TestCollectionEXPoco"
-'@Folder("VBAProject")
+'@Folder "Helpers.CollectionEx.Tests"
 Option Explicit
 
 Public Sub DoTestPoco()
@@ -21,5 +21,4 @@ Public Sub DoTestPoco()
     ' It will also check TypeOf on each item in the collection
     CollectionEx.From(PocoColl).ForEach TestPOCO, "HandlePOCO"
 End Sub
-
 

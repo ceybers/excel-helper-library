@@ -176,7 +176,7 @@ Private Sub ICollectionEx_ForEach(ByVal Object As Object, ByVal MethodName As Va
     For Each ThisVariant In This.Dictionary.Items
         If TypeOf ThisVariant Is Object  Then
             On Error GoTo ErrHandler
-            Call CallByName(Object, MethodName, VbMethod, ThisVariant)
+            CallByName Object, MethodName, VbMethod, ThisVariant
             On Error GoTo 0
         End If
     Next ThisVariant

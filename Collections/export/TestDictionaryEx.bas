@@ -1,5 +1,5 @@
 Attribute VB_Name = "TestDictionaryEx"
-'@Folder("VBAProject")
+'@Folder "Helpers.CollectionEx.Tests"
 Option Explicit
 
 Public Sub DoTestDictionaryEx()

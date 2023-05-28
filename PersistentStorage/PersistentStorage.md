@@ -27,14 +27,14 @@
 - [ ] Refactoring singleton implementation to fit into MVVM's AppContext better
 
 # Reference
-## ISettingsModel methods
+## `ISettingsModel` methods
 ```vb
 Function User() As ISettings
 Function Workbook() As ISettings
 Function Table(ByVal TableName As String) As ISettings
 ```
 
-## ISettings methods
+## `ISettings` methods
 ```vb
 Function GetFlag(ByVal FlagName As String) As Boolean
 Sub SetFlag(ByVal FlagName As String, ByVal Value As Boolean)

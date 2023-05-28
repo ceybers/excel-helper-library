@@ -34,3 +34,33 @@
   - ToCollection() As Collection
   - ToDictionary() As Scripting.Dictionary
 
+# Stacks, Queues, and Most Recently Used
+## `Stack` methods
+```vb
+Sub Push(ByVal Value As Variant)
+Function Pop() As Variant
+Function Top() As Variant
+Function IsEmpty() As Boolean
+Function Count() As Long
+Sub Clear()
+```
+
+## `Queue` methods
+```vb
+Sub Enqueue(ByVal Value As Variant)
+Function Dequeue() As Variant
+Function IsEmpty() As Boolean
+Function Count() As Long
+Sub Clear()
+```
+
+## `MostRecentlyUsed` methods
+```vb
+Sub SetMaximumLength(ByVal Length As Long)
+Sub Add(ByVal Value As Variant)
+Sub Remove(ByVal Value As Variant)
+Sub RemoveAt(ByVal Index As Variant)
+Function Item(ByVal Index As Long) As Variant
+Function Count() As Long
+Sub Clear()
+```

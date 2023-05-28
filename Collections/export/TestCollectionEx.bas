@@ -1,5 +1,5 @@
 Attribute VB_Name = "TestCollectionEx"
-'@Folder("VBAProject")
+'@Folder "Helpers.CollectionEx.Tests"
 Option Explicit
 
 Public Sub DoTestCollectionEx()
@@ -68,5 +68,4 @@ Public Sub DoTestCollectionEx()
     
     Debug.Print "Asserts passed."
 End Sub
-
 
