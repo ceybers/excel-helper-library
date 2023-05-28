@@ -38,7 +38,7 @@ Private Sub IMostRecentlyUsed_SetMaximumLength(ByVal Length As Long)
     Debug.Assert Length <= MAXIMUM_MRU_LENGTH
     This.MaxLength = Length
     ReDim Preserve This.Arr(0 To (This.MaxLength - 1))
-    If This.Cursor = -1 > Length Then
+    If This.Tail = -1 > Length Then
         Debug.Assert False
     End If
 End Sub
