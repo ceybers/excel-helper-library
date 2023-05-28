@@ -13,7 +13,7 @@
 - [x] Basic user-level persistence in My Documents folder
   - [x] Flag (boolean) support
   - [x] Setting (string) support
-  - [ ] Collection support
+  - [x] Collection support
   - [ ] Most Recently Used (MRU) support
   - [ ] Manual Save mode
 - [x] Workbook-level and ListObject-level persistence via CustomXMLPart object
