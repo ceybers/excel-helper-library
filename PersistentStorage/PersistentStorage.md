@@ -7,6 +7,7 @@
 - All three of these can be stored either at the workbook-level (singleton), or at the table-level (supporting multiple tables).
 - The tables are not linked or limited to the actual ListObjects in the workbook.
 - If a key does not exist, the getter returns the default value. The setter will automatically insert the key if it doesn't exist, and will update it if it does (i.e., Upsert).
+- MRU support via `ISettings`' Get/Set Collection and `MostRecentlyUsed`'s To/From Collection.
 - ~~If no settings model already exists, using the Create method will create an empty one.~~
 
 ## TODO
@@ -14,13 +15,13 @@
   - [x] Flag (boolean) support
   - [x] Setting (string) support
   - [x] Collection support
-  - [ ] Most Recently Used (MRU) support
+  - ~~[ ] Most Recently Used (MRU) support~~
   - [ ] Manual Save mode
 - [x] Workbook-level and ListObject-level persistence via CustomXMLPart object
   - [x] Flag (boolean) support
   - [x] Setting (string) support
   - [x] Collection support
-  - [ ] Most Recently Used (MRU) support
+  - ~~[ ] Most Recently Used (MRU) support~~
   - [ ] Manual Save mode
 - [x] Passing UUID to SettingsModel
 - [x] Refactoring SettingsModel to move XMLSettings specific code into own class
