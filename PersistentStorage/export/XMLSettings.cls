@@ -106,6 +106,10 @@ Private Function ISettings_GetCollection(ByVal CollectionName As String) As Coll
     End If
 End Function
 
+Private Function ISettings_HasCollection(ByVal CollectionName As String) As Boolean
+    ISettings_HasCollection = Not ISettings_GetCollection Is Nothing
+End Function
+
 Private Sub ISettings_SetCollection(ByVal CollectionName As String, ByVal Collection As Collection)
     Dim XPath As String
     XPath = XPathPrefix & "/" & COLLECTIONS_NODE & "/" & COLLECTION_NODE & "[@Name='" & CollectionName & "']"

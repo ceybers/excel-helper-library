@@ -115,6 +115,10 @@ Private Function ISettings_GetCollection(ByVal CollectionName As String) As Coll
     Set ISettings_GetCollection = Result
 End Function
 
+Private Function ISettings_HasCollection(ByVal CollectionName As String) As Boolean
+    ISettings_HasCollection = This.Collections.Exists(CollectionName)
+End Function
+
 Private Sub ISettings_SetCollection(ByVal CollectionName As String, ByVal Collection As Collection)
     If Not IsKeyValid(CollectionName) Then
         Err.Raise vbObjectError + 9, "MyDocSettings", "Collection name is not valid."
@@ -246,7 +250,6 @@ Private Function LoadCollection(ByVal CollectionName As String)
     
     LoadSection SectionName, Result
 End Function
-
 
 Private Sub SaveData()
     Dim FileNumber As Long
