@@ -37,6 +37,13 @@ Private Sub IQueue_Enqueue(ByVal Value As Variant)
     This.Arr(This.Tail) = Value
 End Sub
 
+Private Function IQueue_TryDequeue(ByRef OutValue As Variant) As Boolean
+    Debug.Assert Not Me Is Queue
+    If This.Head >= This.Tail Then Exit Function
+    OutValue = IQueue_Dequeue
+    IQueue_TryDequeue = True
+End Function
+
 Private Function IQueue_Dequeue() As Variant
     Debug.Assert Not Me Is Queue
     If This.Head >= This.Tail Then Exit Function
@@ -59,7 +66,7 @@ Private Sub IQueue_Clear()
     Debug.Assert Not Me Is Queue
     Dim i As Long
     For i = UBound(This.Arr) To LBound(This.Arr) Step -1
-        This.Arr(i) = emtpy
+        This.Arr(i) = Empty
     Next i
     This.Head = -1
     This.Tail = -1

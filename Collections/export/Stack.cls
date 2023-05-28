@@ -35,6 +35,13 @@ Private Sub IStack_Push(ByVal Value As Variant)
     This.Arr(This.Cursor) = Value
 End Sub
 
+Private Function IStack_TryPop(ByRef OutValue As Variant) As Boolean
+    Debug.Assert Not Me Is Stack
+    If This.Cursor < 0 Then Exit Function
+    OutValue = IStack_Pop
+    IStack_TryPop = True
+End Function
+
 Private Function IStack_Pop() As Variant
     Debug.Assert Not Me Is Stack
     If This.Cursor < 0 Then Exit Function

@@ -143,9 +143,9 @@ Private Function ICollectionEx_GetByIndex(ByVal Index As Long) As Variant
     End If
 End Function
 
-Private Function ICollectionEx_TryGetByIndex(ByVal Index As Long, ByRef outValue As Variant) As Boolean
+Private Function ICollectionEx_TryGetByIndex(ByVal Index As Long, ByRef OutValue As Variant) As Boolean
     If Not IsIndexInBounds(Index) Then Exit Function
-    outValue = This.Array(Index)
+    OutValue = This.Array(Index)
     ICollectionEx_TryGetByIndex = True
 End Function
 
@@ -153,7 +153,7 @@ Private Function ICollectionEx_GetByKey(ByVal Key As Variant) As Variant
     Err.Raise vbObjectError + 22, "ICollectionEx", "GetByKey Cannot Be Implemented"
 End Function
 
-Private Function ICollectionEx_TryGetByKey(ByVal Key As Variant, ByRef outValue As Variant) As Boolean
+Private Function ICollectionEx_TryGetByKey(ByVal Key As Variant, ByRef OutValue As Variant) As Boolean
     Err.Raise vbObjectError + 22, "ICollectionEx", "TryGetByKey Cannot Be Implemented"
 End Function
 

@@ -25,5 +25,13 @@ Public Sub TestStack()
     Debug.Assert s.Count = 0
     Debug.Assert s.IsEmpty = True
     
+    For Each Element In Array("Xray", "Yoyo", "Zebra")
+        s.Push Element
+    Next Element
+    
+    Do While s.TryPop(Element)
+        Debug.Print Element
+    Loop
+    
     Debug.Print "Asserts passed."
 End Sub

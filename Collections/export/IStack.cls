@@ -15,6 +15,9 @@ Option Explicit
 Public Sub Push(ByVal Value As Variant)
 End Sub
 
+Public Function TryPop(ByRef OutValue As Variant) As Boolean
+End Function
+
 Public Function Pop() As Variant
 End Function
 

@@ -7,6 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_Description = "Data structure for storing a Most Recently Used list."
+'@ModuleDescription "Data structure for storing a Most Recently Used list."
 '@PredeclaredId
 '@Folder("Helpers.CollectionEx")
 Option Explicit
@@ -85,8 +87,9 @@ End Sub
 
 Private Sub IMostRecentlyUsed_RemoveAt(ByVal Index As Variant)
     Debug.Assert Not Me Is MostRecentlyUsed
-    Debug.Assert Index > -1
-    Debug.Assert Index <= This.Tail
+    If (Index < 0) Or (Index > This.Tail) Then
+        Err.Raise vbObjectError + 5, "MostRecentlyUsed", "Index out of bounds"
+    End If
     
     Dim i As Long
     For i = Index To (This.Tail - 1)
@@ -99,8 +102,9 @@ End Sub
 
 Private Function IMostRecentlyUsed_Item(ByVal Index As Long) As Variant
     Debug.Assert Not Me Is MostRecentlyUsed
-    Debug.Assert Index > -1
-    Debug.Assert Index <= This.Tail 'UBound(This.Arr)
+    If (Index < 0) Or (Index > This.Tail) Then
+        Err.Raise vbObjectError + 5, "MostRecentlyUsed", "Index out of bounds"
+    End If
     IMostRecentlyUsed_Item = This.Arr(Index)
 End Function
 
@@ -128,3 +132,22 @@ Private Function IndexOf(ByVal Value As Variant) As Long
     Next i
     IndexOf = -1
 End Function
+
+Private Function IMostRecentlyUsed_ToCollection() As Collection
+    Dim Result As Collection
+    Set Result = New Collection
+    
+    Dim i As Long
+    For i = 0 To This.Tail
+        Result.Add Item:=This.Arr(i), Key:=CStr(i)
+    Next i
+    
+    Set IMostRecentlyUsed_ToCollection = Result
+End Function
+
+Private Sub IMostRecentlyUsed_FromCollection(ByVal Collection As Collection)
+    Dim i As Long
+    For i = Collection.Count To 1 Step -1
+        IMostRecentlyUsed_Add Collection.Item(i)
+    Next i
+End Sub

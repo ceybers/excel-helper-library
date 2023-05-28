@@ -32,6 +32,15 @@ Public Sub TestQueue()
     q.Enqueue "Foxtrot"
     Debug.Assert q.Count = 1
     
+    q.Clear
+    
+    For Each Element In Array("Xray", "Yoyo", "Zebra")
+        q.Enqueue Element
+    Next Element
+    
+    Do While q.TryDequeue(Element)
+        Debug.Print Element
+    Loop
     Debug.Print "Asserts passed."
 End Sub
 

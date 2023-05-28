@@ -38,9 +38,32 @@ Public Sub TestMRU()
     Debug.Assert mru.Item(1) = "Bravo"
     ' Remove works
 
+    Dim coll As Collection
+    Set coll = mru.ToCollection
+    Debug.Assert coll.Count = 2
+    Debug.Assert coll.Item(1) = "Delta"
+    Debug.Assert coll.Item(2) = "Bravo"
+    ' ToCollection works
+
     mru.Clear
     Debug.Assert mru.Count = 0
     ' Clear works
+    
+    Set coll = New Collection
+    With coll
+        .Add "Zebra"
+        .Add "Xray"
+        .Add "Yoyo"
+        .Add "Zebra"
+    End With
+    
+    mru.FromCollection coll
+    
+    Debug.Assert mru.Count = 3
+    Debug.Assert mru.Item(0) = "Zebra"
+    Debug.Assert mru.Item(1) = "Xray"
+    Debug.Assert mru.Item(2) = "Yoyo"
+    ' FromCollection works
     
     Debug.Print "Asserts passed."
 End Sub

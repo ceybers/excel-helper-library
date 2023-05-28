@@ -15,6 +15,9 @@ Option Explicit
 Public Sub Enqueue(ByVal Value As Variant)
 End Sub
 
+Public Function TryDequeue(ByRef OutValue As Variant) As Boolean
+End Function
+
 Public Function Dequeue() As Variant
 End Function
 
