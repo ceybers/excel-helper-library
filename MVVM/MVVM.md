@@ -1,2 +1,2 @@
 # MVVM
-This is based almost entirely on [Rubberduck VBA's MVVM implementation](https://rubberduckvba.wordpress.com/2017/10/25/userform1-show/).
+This is based almost entirely on [Rubberduck VBA's MVVM implementation](https://rubberduckvba.wordpress.com/2017/10/25/userform1-show/). Basically just the bare minimum routines in the code-behind for the Form object.

@@ -10,6 +10,9 @@
 - MRU support via `ISettings`' Get/Set Collection and `MostRecentlyUsed`'s To/From Collection.
 - ~~If no settings model already exists, using the Create method will create an empty one.~~
 
+## Important
+- GetCollection does not retain keys!
+
 ## TODO
 - [x] Basic user-level persistence in My Documents folder
   - [x] Flag (boolean) support

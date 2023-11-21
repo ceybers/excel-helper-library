@@ -1,4 +1,6 @@
 # DebugEx
+Use VBA to write log events (with priority, color, channels, etc.) to a text file that is watched by a PowerShell script which provides formatting.
+
 ## PowerShell script
 ```PowerShell
 function Read-VBADebugEx {

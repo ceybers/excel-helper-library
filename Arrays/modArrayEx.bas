@@ -130,6 +130,7 @@ Public Function ArrayUnique(arr As Variant) As Variant
     
     ArrayUnique = ArrayTrim(result, n)
 End Function
+
 ' Returns a distinct copy of the array.
 ' In the case of duplicate values, only one instance is returned.
 ' Blanks and errors are excluded.
