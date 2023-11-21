@@ -11,7 +11,7 @@ Function VisibleRangeToArray(ByVal rng As Range) As Variant
 Does the same thing as `ArrayToFilteredRange`?
 
 ## Analysis Functions
-These were for matching key columns in `Table Transfer Tool`, as well as Column Quality tests similar to Power BI.
+These were for matching key columns in `Table Transfer Tool` and `Inline Regex Tool`, as well as Column Quality tests similar to Power BI.
 
 ### ArrayAnalyseOne (function)
 ```vb
