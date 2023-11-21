@@ -32,3 +32,21 @@ Public Function IsWorkbookOpen(ByVal filename As String) As Boolean
     Next wb
 End Function
 
+Public Function TryGetWorkbook(ByVal filename As String, ByRef wb As Workbook, Optional path As String = vbNullString) As Boolean
+    Dim curWB As Workbook
+    For Each curWB In Application.Workbooks
+        If path = vbNullString Then
+            If curWB.Name = filename Then
+                Set wb = curWB
+                TryGetWorkbook = True
+                Exit Function
+            End If
+        Else
+            If curWB.fullname = path & filename Then
+                Set wb = curWB
+                TryGetWorkbook = True
+                Exit Function
+            End If
+        End If
+    Next curWB
+End Function

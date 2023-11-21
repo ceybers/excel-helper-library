@@ -11,6 +11,7 @@ There are many like it, but this one is mine.
 
 ## Helper modules for Objects
 - [Array helpers](Arrays/ArrayHelpers.md)
+- [Collection helpers](Collections/CollectionHelpers.md)
 - [ListColumn helpers](ListColumns/ListColumnHelpers.md)
 - [ListObject helpers](ListObjects/ListObjectHelpers.md)
 - [Range helpers](Ranges/RangeHelpers.md)

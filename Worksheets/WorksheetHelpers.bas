@@ -73,3 +73,13 @@ Public Function AddOrGetWorksheet(ByVal worksheetName As String) As Worksheet
     
     Set AddOrGetWorksheet = ws
 End Function
+
+Public Function TryGetWorkSheet(ByVal wb As Workbook, ByVal worksheetName As String, ByRef ws As Worksheet) As Boolean
+    Dim curWS As Worksheet
+    For Each curWS In wb.Worksheets
+        If curWS.Name = worksheetName Then
+            Set ws = curWS
+            TryGetWorkSheet = True
+        End If
+    Next curWS
+End Function

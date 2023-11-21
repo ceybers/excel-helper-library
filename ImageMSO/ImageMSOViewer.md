@@ -7,3 +7,6 @@ Second worksheet has screenshots of some icons I found particularly useful.
 
 ## Screenshot
 ![Screenshot of utility](ImageMSOExample.png)
+
+## My Standard Image List
+[modStandardImageList.bas](modStandardImageList.bas) has my list of commonly used icons.

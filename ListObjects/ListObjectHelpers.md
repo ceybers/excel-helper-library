@@ -1,5 +1,5 @@
 # ListObject Helpers
-Some project-specific helper functions for ListObjects. I still need to refactor these to be reusable.
+Some project-specific helper functions for ListObjects. I still need to refactor these to be reusable. Lots of messy code to try and parse strings into ListObjects that may or may not be present in the referenced workbook.
 
 ## Functions
 ```vb
