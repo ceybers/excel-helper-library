@@ -1,5 +1,10 @@
 # ListColumn Helpers
+## Functions
+```vb
+TryGetListColumn(ByVal ListObject As ListObject, ByVal ListColumnName As String, ByRef OutListColumn As Public Function Exists(ByVal ListObject As ListObject, ByVal ListColumnName As String) As Boolean
+```
 
+# ListColumn Analyzers
 ## Functions
 ```vb
 GetR1C1(ByVal ListColumn As ListColumn) As String

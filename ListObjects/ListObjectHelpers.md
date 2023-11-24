@@ -3,6 +3,7 @@ Some project-specific helper functions for ListObjects. I still need to refactor
 
 ## Functions
 ```vb
+HasListColumn(ByVal ListObject As ListObject, ByVal ListColumnName As String) As Boolean
 GetAllListObjects(ByVal Workbook As Workbook) As Collection
 TableFromString(ByVal s As String) As ListObject
 TableToString(ByVal lo As ListObject) As String
