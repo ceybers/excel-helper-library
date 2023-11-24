@@ -25,3 +25,11 @@ Public Sub CollectionClear(ByVal Collection As Collection)
         Collection.Remove i
     Next i
 End Sub
+
+'@Description "Copies all items in collection LHS to RHS. Does not copy keys."
+Public Sub Clone(ByVal LHS As Collection, ByVal RHS As Collection)
+    Dim Item As Variant
+    For Each Item In LHS
+        RHS.Add Item
+    Next Item
+End Sub
