@@ -8,11 +8,13 @@ There are many like it, but this one is mine.
 - [ImageMSO Viewer](ImageMSO/ImageMSOViewer.md)
 - [MVVM (basic implementation)](MVVM/MVVM.md)
 - [Persistent Workbook Storage](PersistentStorage/PersistentStorage.md)
+- [User Defined Functions](UDFs/UDFs.md)
 
 ## Helper modules for Objects
 - [Array helpers](Arrays/ArrayHelpers.md)
-- [Collection helpers](Collections/CollectionHelpers.md)
-- [ListColumn helpers](ListColumns/ListColumnHelpers.md)
+- [Collection helpers](Collections/CollectionHelpers.md) ([TODO](Collections/TODO.md))
+- [Excel Object helpers](ExcelObjectHelpers/ExcelObjectHelpers.md) ([TODO](ExcelObjectHelpers/TODO.md))
+- [ListColumn helpers](ListColumns/ListColumnHelpers.md) ([TODO](ListColumns/TODO.md))
 - [ListObject helpers](ListObjects/ListObjectHelpers.md)
 - [Range helpers](Ranges/RangeHelpers.md)
 - [Workbook helpers](Workbooks/WorkbookHelpers.md)
@@ -20,5 +22,8 @@ There are many like it, but this one is mine.
 
 ## Helper modules for Controls
 - [ListView helpers](ListView/ListViewHelpers.md)
+- TreeView helpers
 
-https://dataedo.com/asset/img/docs/8_0/schema_change_tracking_overview.png
+# Miscellaneous
+- [Dev Notes](TODO/DevNotes.md)
+- [Namespace Convention](TODO/NamespaceConvention.md)

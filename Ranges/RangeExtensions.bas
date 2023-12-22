@@ -1,5 +1,6 @@
 Option Explicit
 
+' Probably faster to use .SpecialCells
 Public Function RangeIsEmpty(ByVal rng As Range) As Boolean
     Dim cell As Range
     For Each cell In rng

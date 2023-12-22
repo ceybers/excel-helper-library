@@ -11,3 +11,5 @@
 ## Toolbar
 - MSComctlLib.ButtonStyleConstants
 - Images seem to not be working in 64-bit Excel.
+## Schema Change Tracking
+- [Dataedo](https://dataedo.com/asset/img/docs/8_0/schema_change_tracking_overview.png)

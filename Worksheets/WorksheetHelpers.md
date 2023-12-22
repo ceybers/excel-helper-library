@@ -1,11 +1,29 @@
 # Worksheet Helpers
 Mostly used in `Table Split Tool`.
 
-## Functions
+# Methods
+## AddOrGetWorksheet
+Returns the Worksheet with a given name. If it does not exist, create and return it.
 ```vb
-IsValidSheetName(ByVal SheetName As String) As Boolean
-TryRemoveSheet(ByVal Workbook As Workbook, ByVal SheetName As String) As Boolean
-SheetExists(ByVal Workbook As Workbook, ByVal SheetName As String) As Boolean
-AddOrGetWorksheet(ByVal worksheetName As String) As Worksheet
-TryGetWorkSheet(ByVal wb As Workbook, ByVal worksheetName As String, ByRef ws As Worksheet) As Boolean
+AddOrGetWorksheet(Workbook As Workbook, WorksheetName As String) As Worksheet
+```
+## TryGetWorksheet
+Tries to return the Worksheet with the given name from a Workbook.
+```vb
+TryGetWorksheet(Workbook As Workbook, WorksheetName As String, OutWorksheet As Worksheet) As Boolean
+```
+## TryRemoveWorksheet
+Tries to remove a Worksheet with a given name from a Workbook.
+```vb
+TryRemoveWorksheet(Workbook As Workbook, WorksheetName As String) As Boolean
+```
+## WorksheetExists
+Returns True if a Worksheet with the given name exists in a Workbook.
+```vb
+WorksheetExists(Workbook As Workbook, WorksheetName As String) As Boolean
+```
+## IsValidWorksheetName
+Tests if a given string is a valid Worksheet name.
+```vb
+IsValidWorksheetName(SheetName As String) As Boolean
 ```
