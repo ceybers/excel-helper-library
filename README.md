@@ -20,3 +20,5 @@ There are many like it, but this one is mine.
 
 ## Helper modules for Controls
 - [ListView helpers](ListView/ListViewHelpers.md)
+
+https://dataedo.com/asset/img/docs/8_0/schema_change_tracking_overview.png
