@@ -14,6 +14,8 @@
 - GetCollection does not retain keys!
 
 ## TODO
+- [ ] FIX ⚠ `ISettings_GetCollection` will raise an error if it can't find a Collection.
+  - Since we can't control or assume the contents of an .INI file, shouldn't we have a TryGetCollection function?
 - [x] Basic user-level persistence in My Documents folder
   - [x] Flag (boolean) support
   - [x] Setting (string) support
