@@ -1,4 +1,5 @@
 Attribute VB_Name = "TestCollectionEXPoco"
+'@IgnoreModule UseMeaningfulName
 '@Folder "Helpers.CollectionEx.Tests"
 Option Explicit
 

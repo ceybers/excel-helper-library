@@ -1,14 +1,16 @@
 Attribute VB_Name = "TestQueue"
+'@IgnoreModule UseMeaningfulName
 '@Folder("Helpers.CollectionEx.Tests")
 Option Explicit
 
 Public Sub TestQueue()
     Debug.Print "Testing Queue class."
     
-    Dim qq As Queue
     Dim q As IQueue
     Set q = New Queue
-    Set qq = q
+    
+    'Dim qq As Queue
+    'Set qq = q
     
     Debug.Assert q.Count = 0
     

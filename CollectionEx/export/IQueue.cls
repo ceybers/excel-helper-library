@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-'@Folder("Helpers.CollectionEx")
+'@Folder "Helpers.CollectionEx.Abstract"
 '@Interface
 
 Public Sub Enqueue(ByVal Value As Variant)

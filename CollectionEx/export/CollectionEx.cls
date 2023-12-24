@@ -24,7 +24,7 @@ Public Function From(ByVal Collection As Collection) As ICollectionEx
     If Collection Is Nothing Then Exit Function
     If Not TypeOf Collection Is Collection Then Exit Function
     
-    Dim Result As New CollectionEx
+    Dim Result As CollectionEx
     Set Result = New CollectionEx
     Result.SetCollection Collection
     Set From = Result
@@ -184,7 +184,7 @@ End Sub
 
 Private Sub ICollectionEx_ForEach(ByVal Object As Object, ByVal MethodName As Variant)
     Dim ThisVariant As Variant
-    Dim ThisValue As Variant
+    'Dim ThisValue As Variant
     For Each ThisVariant In This.Collection
         If TypeOf ThisVariant Is Object  Then
             On Error GoTo ErrHandler

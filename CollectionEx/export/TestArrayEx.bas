@@ -1,9 +1,10 @@
 Attribute VB_Name = "TestArrayEx"
+'@IgnoreModule UseMeaningfulName
 '@Folder "Helpers.CollectionEx.Tests"
 Option Explicit
 
 Public Sub DoTestArrayEx()
-    Dim Result As Variant
+    'Dim Result As Variant
 
     Dim Arr As Variant
     Arr = Array("Alpha", "Bravo", "Charlie")
@@ -60,9 +61,9 @@ Public Sub DoTestArrayEx()
     Set testRng = ThisWorkbook.Worksheets.Item(1).Range("A1")
     testRng.Parent.UsedRange.Value2 = vbNullString
     ArrayEx.From(Arr).ToRange testRng
-    Debug.Assert testRng.Cells(1, 1).Value2 = Arr(0)
-    Debug.Assert testRng.Cells(2, 1).Value2 = Arr(1)
-    Debug.Assert testRng.Cells(3, 1).Value2 = Arr(2)
+    Debug.Assert testRng.Cells.Item(1, 1).Value2 = Arr(0)
+    Debug.Assert testRng.Cells.Item(2, 1).Value2 = Arr(1)
+    Debug.Assert testRng.Cells.Item(3, 1).Value2 = Arr(2)
     testRng.Parent.UsedRange.Value2 = vbNullString
     Debug.Print "ToRange() OK"
     

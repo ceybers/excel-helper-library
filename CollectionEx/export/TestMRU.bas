@@ -1,15 +1,16 @@
 Attribute VB_Name = "TestMRU"
+'@IgnoreModule UseMeaningfulName
 '@Folder("Helpers.CollectionEx.Tests")
 Option Explicit
 
 Public Sub TestMRU()
     Debug.Print "Testing MRU class."
     
-    Dim mmru As MostRecentlyUsed
-    
     Dim mru As IMostRecentlyUsed
     Set mru = New MostRecentlyUsed
-    Set mmru = mru
+    
+    'Dim mmru As MostRecentlyUsed
+    'Set mmru = mru
     
     Debug.Assert mru.Count = 0
     mru.Add "Alpha"

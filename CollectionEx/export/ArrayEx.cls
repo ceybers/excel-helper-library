@@ -168,7 +168,7 @@ End Sub
 
 Private Sub ICollectionEx_ForEach(ByVal Object As Object, ByVal MethodName As Variant)
     Dim ThisVariant As Variant
-    Dim ThisValue As Variant
+    'Dim ThisValue As Variant
     For Each ThisVariant In This.Array
         If TypeOf ThisVariant Is Object  Then
             On Error GoTo ErrHandler

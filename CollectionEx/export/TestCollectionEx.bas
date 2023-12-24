@@ -1,4 +1,5 @@
 Attribute VB_Name = "TestCollectionEx"
+'@IgnoreModule UseMeaningfulName
 '@Folder "Helpers.CollectionEx.Tests"
 Option Explicit
 
@@ -64,10 +65,10 @@ Public Sub DoTestCollectionEx()
     Set testRng = ThisWorkbook.Worksheets.Item(1).Range("A1")
     testRng.Parent.UsedRange.Value2 = vbNullString
     CollectionEx.From(coll).ToRange testRng
-    Debug.Assert testRng.Cells(1, 1).Value2 = coll.Item(1)
-    Debug.Assert testRng.Cells(2, 1).Value2 = coll.Item(2)
-    Debug.Assert testRng.Cells(3, 1).Value2 = coll.Item(3)
-    Debug.Assert testRng.Cells(4, 1).Value2 = coll.Item(4)
+    Debug.Assert testRng.Cells.Item(1, 1).Value2 = coll.Item(1)
+    Debug.Assert testRng.Cells.Item(2, 1).Value2 = coll.Item(2)
+    Debug.Assert testRng.Cells.Item(3, 1).Value2 = coll.Item(3)
+    Debug.Assert testRng.Cells.Item(4, 1).Value2 = coll.Item(4)
     testRng.Parent.UsedRange.Value2 = vbNullString
     Debug.Print "ToRange() OK"
     

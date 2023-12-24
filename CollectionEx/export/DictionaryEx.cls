@@ -24,7 +24,7 @@ Public Function From(ByVal Dictionary As Scripting.Dictionary) As ICollectionEx
     If Dictionary Is Nothing Then Exit Function
     If Not TypeOf Dictionary Is Scripting.Dictionary Then Exit Function
     
-    Dim Result As New DictionaryEx
+    Dim Result As DictionaryEx
     Set Result = New DictionaryEx
     Result.SetDictionary Dictionary
     Set From = Result
@@ -172,7 +172,7 @@ End Sub
 
 Private Sub ICollectionEx_ForEach(ByVal Object As Object, ByVal MethodName As Variant)
     Dim ThisVariant As Variant
-    Dim ThisValue As Variant
+    'Dim ThisValue As Variant
     For Each ThisVariant In This.Dictionary.Items
         If TypeOf ThisVariant Is Object  Then
             On Error GoTo ErrHandler
