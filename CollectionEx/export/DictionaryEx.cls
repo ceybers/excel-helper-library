@@ -36,7 +36,7 @@ End Sub
 
 Private Function ICollectionEx_Contains(ByVal Value As Variant) As Boolean
     Dim ThisVariant As Variant
-    For Each ThisVariant In This.Dictionary.Items
+    For Each ThisVariant In This.Dictionary.Keys
         If ThisVariant = Value Then
             ICollectionEx_Contains = True
             Exit Function
@@ -68,7 +68,7 @@ Private Function ICollectionEx_IndexOf(ByVal Value As Variant) As Long
     ICollectionEx_IndexOf = RESULT_IF_NOT_FOUND
     Dim i As Long
     For i = COLLECTION_LBOUND To (This.Dictionary.Count - 1)
-        If This.Dictionary.Items(i) = Value Then
+        If This.Dictionary.Keys(i) = Value Then
             ICollectionEx_IndexOf = i
             Exit Function
         End If
@@ -212,3 +212,19 @@ End Function
 Private Function ICollectionEx_ToDictionary() As Scripting.Dictionary
     Set ICollectionEx_ToDictionary = This.Dictionary
 End Function
+
+Private Sub ICollectionEx_ToRange(ByVal Range As Range)
+    Dim TargetRange As Range
+    Set TargetRange = Range.Cells.Item(1, 1).Resize(RowSize:=ICollectionEx_Count, ColumnSize:=2)
+    
+    Dim vv As Variant
+    vv = TargetRange.Value2
+    
+    Dim i As Long
+    For i = 1 To ICollectionEx_Count
+        vv(i, 1) = This.Dictionary.Keys(i - 1)
+        vv(i, 2) = This.Dictionary.Items(i - 1)
+    Next i
+
+    TargetRange.Value2 = vv
+End Sub

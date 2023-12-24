@@ -68,7 +68,7 @@ Private Function ICollectionEx_IndexOf(ByVal Value As Variant) As Long
     ICollectionEx_IndexOf = RESULT_IF_NOT_FOUND
     Dim i As Long
     For i = COLLECTION_LBOUND To This.Collection.Count
-        If This.Collection(i) = Value Then
+        If This.Collection.Item(i) = Value Then
             ICollectionEx_IndexOf = i
             Exit Function
         End If
@@ -236,3 +236,18 @@ Private Function ICollectionEx_ToDictionary() As Scripting.Dictionary
     
     Set ICollectionEx_ToDictionary = Result
 End Function
+
+Private Sub ICollectionEx_ToRange(ByVal Range As Range)
+    Dim TargetRange As Range
+    Set TargetRange = Range.Cells.Item(1, 1).Resize(RowSize:=ICollectionEx_Count)
+    
+    Dim vv As Variant
+    vv = TargetRange.Value2
+    
+    Dim i As Long
+    For i = 1 To ICollectionEx_Count
+        vv(i, 1) = This.Collection.Item(i)
+    Next i
+
+    TargetRange.Value2 = vv
+End Sub

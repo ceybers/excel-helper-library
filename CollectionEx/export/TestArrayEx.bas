@@ -56,6 +56,16 @@ Public Sub DoTestArrayEx()
     Debug.Assert outDictionary.Count = 3
     Debug.Print "ToDictionary() OK"
     
+    Dim testRng As Range
+    Set testRng = ThisWorkbook.Worksheets.Item(1).Range("A1")
+    testRng.Parent.UsedRange.Value2 = vbNullString
+    ArrayEx.From(Arr).ToRange testRng
+    Debug.Assert testRng.Cells(1, 1).Value2 = Arr(0)
+    Debug.Assert testRng.Cells(2, 1).Value2 = Arr(1)
+    Debug.Assert testRng.Cells(3, 1).Value2 = Arr(2)
+    testRng.Parent.UsedRange.Value2 = vbNullString
+    Debug.Print "ToRange() OK"
+    
     With ArrayEx.From(Arr)
         Debug.Assert .Count = 3
         .Clear

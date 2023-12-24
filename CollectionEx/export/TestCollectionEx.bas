@@ -59,7 +59,18 @@ Public Sub DoTestCollectionEx()
     Debug.Assert TypeName(outDictionary) = "Dictionary"
     Debug.Assert outDictionary.Count = 4
     Debug.Print "ToDictionary() OK"
-
+    
+    Dim testRng As Range
+    Set testRng = ThisWorkbook.Worksheets.Item(1).Range("A1")
+    testRng.Parent.UsedRange.Value2 = vbNullString
+    CollectionEx.From(coll).ToRange testRng
+    Debug.Assert testRng.Cells(1, 1).Value2 = coll.Item(1)
+    Debug.Assert testRng.Cells(2, 1).Value2 = coll.Item(2)
+    Debug.Assert testRng.Cells(3, 1).Value2 = coll.Item(3)
+    Debug.Assert testRng.Cells(4, 1).Value2 = coll.Item(4)
+    testRng.Parent.UsedRange.Value2 = vbNullString
+    Debug.Print "ToRange() OK"
+    
     Debug.Assert CollectionEx.From(coll).Count = 4
     CollectionEx.From(coll).Clear
     Debug.Assert CollectionEx.From(coll).Count = 0

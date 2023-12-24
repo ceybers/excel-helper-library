@@ -50,6 +50,7 @@ ForEach(Object As Object, MethodName As Variant)
 ToArray() As Variant
 ToCollection() As Collection
 ToDictionary() As Scripting.Dictionary
+ToRange(Range as Range)
 ```
 # Examples
 ## Convert Collection to Dictionary

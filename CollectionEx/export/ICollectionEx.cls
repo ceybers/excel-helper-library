@@ -72,3 +72,6 @@ End Function
 
 Public Function ToDictionary() As Scripting.Dictionary
 End Function
+
+Public Sub ToRange(ByVal Range As Range)
+End Sub

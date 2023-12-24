@@ -9,9 +9,9 @@ Public Sub DoTestDictionaryEx()
     Set dict = New Scripting.Dictionary
     
     With dict
-        .Add Item:="Alpha", Key:="Alpha"
-        .Add Item:="Bravo", Key:="Bravo"
-        .Add Item:="Charlie", Key:="Charlie"
+        .Add Item:="AlphaItem", Key:="Alpha"
+        .Add Item:="BravoItem", Key:="Bravo"
+        .Add Item:="CharlieItem", Key:="Charlie"
     End With
     
     Debug.Assert DictionaryEx.From(dict).Contains("Charlie") = True
@@ -24,7 +24,7 @@ Public Sub DoTestDictionaryEx()
        
     Debug.Assert DictionaryEx.From(dict).TryAdd("Charlie", "Charlie") = False
     Debug.Assert DictionaryEx.From(dict).TryAdd("DeltaKey", "DeltaItem") = True
-    Debug.Assert DictionaryEx.From(dict).Contains("DeltaItem") = True
+    Debug.Assert DictionaryEx.From(dict).Contains("DeltaKey") = True
     Debug.Print "TryAdd() OK"
     
     Debug.Assert DictionaryEx.From(dict).TryGetByKey("NonexistingKey", Result) = False
@@ -35,7 +35,7 @@ Public Sub DoTestDictionaryEx()
     'Debug.Assert DictionaryEx.From(dict).TryRemove("NonexistingKey") = False
     Debug.Print "TryRemove() NYI"
     
-    Debug.Assert DictionaryEx.From(dict).GetByIndex(2) = "Charlie"
+    Debug.Assert DictionaryEx.From(dict).GetByIndex(2) = "CharlieItem"
     'Debug.Assert DictionaryEx.From(dict).TryInsert(2, "InsertTest")
     'Debug.Assert DictionaryEx.From(dict).GetByIndex(2) = "InsertTest"
     Debug.Print "GetByIndex() OK"
@@ -59,6 +59,19 @@ Public Sub DoTestDictionaryEx()
     Debug.Assert TypeName(outDictionary) = "Dictionary"
     Debug.Assert outDictionary.Count = 4
     Debug.Print "ToDictionary() OK"
+    
+    Dim testRng As Range
+    Set testRng = ThisWorkbook.Worksheets.Item(1).Range("A1")
+    testRng.Parent.UsedRange.Value2 = vbNullString
+    DictionaryEx.From(dict).ToRange testRng
+    Debug.Assert testRng.Cells(1, 1).Value2 = dict.Keys(0)
+    Debug.Assert testRng.Cells(2, 1).Value2 = dict.Keys(1)
+    Debug.Assert testRng.Cells(3, 1).Value2 = dict.Keys(2)
+    Debug.Assert testRng.Cells(1, 2).Value2 = dict.Items(0)
+    Debug.Assert testRng.Cells(2, 2).Value2 = dict.Items(1)
+    Debug.Assert testRng.Cells(3, 2).Value2 = dict.Items(2)
+    testRng.Parent.UsedRange.Value2 = vbNullString
+    Debug.Print "ToRange() OK"
     
     Debug.Assert DictionaryEx.From(dict).Count = 4
     DictionaryEx.From(dict).Clear

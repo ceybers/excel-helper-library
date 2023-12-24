@@ -215,3 +215,18 @@ Private Function ICollectionEx_ToDictionary() As Scripting.Dictionary
     Next i
     Set ICollectionEx_ToDictionary = Result
 End Function
+
+Private Sub ICollectionEx_ToRange(ByVal Range As Range)
+    Dim TargetRange As Range
+    Set TargetRange = Range.Cells.Item(1, 1).Resize(RowSize:=ICollectionEx_Count)
+    
+    Dim vv As Variant
+    vv = TargetRange.Value2
+    
+    Dim i As Long
+    For i = 1 To ICollectionEx_Count
+        vv(i, 1) = This.Array(i - 1)
+    Next i
+
+    TargetRange.Value2 = vv
+End Sub
