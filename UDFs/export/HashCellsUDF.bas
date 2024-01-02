@@ -2,16 +2,26 @@ Attribute VB_Name = "HashCellsUDF"
 '@Folder("VBAProject")
 Option Explicit
 
+Private Const LEN_MD5_HASH As Long = 32
+Private Const LEN_SHA256_HASH As Long = 64
+
 '@Description "Calculates the MD5 hash of the values in a range of cells."
-Public Function HashCellsMD5(ByVal Range As Range) As Variant
+Public Function HashCellsMD5(ParamArray Range() As Variant) As Variant
     Dim ConcatenatedHashes As String
-    
     Dim Cell As Range
-    For Each Cell In Range.Cells
-        ConcatenatedHashes = ConcatenatedHashes & StringToMD5(CStr(Cell.Value2))
-    Next Cell
+    Dim Item As Variant
     
-    If Range.Cells.Count > 1 Then
+    For Each Item In Range
+        If TypeOf Item Is Range Then
+            For Each Cell In Item.Cells
+                ConcatenatedHashes = ConcatenatedHashes & StringToMD5(CStr(Cell.Value2))
+            Next Cell
+        Else
+            ConcatenatedHashes = ConcatenatedHashes & StringToMD5(CStr(Item))
+        End If
+    Next Item
+    
+    If Len(ConcatenatedHashes) > LEN_MD5_HASH Then
         ConcatenatedHashes = StringToMD5(ConcatenatedHashes)
     End If
     
@@ -19,16 +29,23 @@ Public Function HashCellsMD5(ByVal Range As Range) As Variant
 End Function
 
 '@Description "Calculates the SHA256 hash of the values in a range of cells."
-Public Function HashCellsSHA256(ByVal Range As Range) As Variant
+Public Function HashCellsSHA256(ParamArray Range() As Variant) As Variant
     Dim ConcatenatedHashes As String
-    
     Dim Cell As Range
-    For Each Cell In Range.Cells
-        ConcatenatedHashes = ConcatenatedHashes & StringToSHA256(CStr(Cell.Value2))
-    Next Cell
+    Dim Item As Variant
     
-    If Range.Cells.Count > 1 Then
-        ConcatenatedHashes = StringToMD5(ConcatenatedHashes)
+    For Each Item In Range
+        If TypeOf Item Is Range Then
+            For Each Cell In Item.Cells
+                ConcatenatedHashes = ConcatenatedHashes & StringToSHA256(CStr(Cell.Value2))
+            Next Cell
+        Else
+            ConcatenatedHashes = ConcatenatedHashes & StringToSHA256(CStr(Item))
+        End If
+    Next Item
+    
+    If Len(ConcatenatedHashes) > LEN_SHA256_HASH Then
+        ConcatenatedHashes = StringToSHA256(ConcatenatedHashes)
     End If
     
     HashCellsSHA256 = ConcatenatedHashes
