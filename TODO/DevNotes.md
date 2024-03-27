@@ -1,5 +1,9 @@
 # Developer Notes for Excel VBA
 ## Notes
+### String Concatenation and Performance
+- Use Arrays and `Join()` instead of concatenating strings (e.g., `foobar = foobar & xyz`) when having to join large groups of data.
+### UDFs and Static Objects
+- Use the `Static foobar as Object: If foobar Is Nothing: Set foobar = CreateFoobar()` pattern to avoid having to instantiate Objects for each cell that calls a UDF.
 ## API References
 ## External References
 - [Keywords - Visual Basic | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/keywords/)
