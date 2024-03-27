@@ -1,112 +1,86 @@
 Attribute VB_Name = "HashCellsUDF"
-'@Folder("VBAProject")
+'@IgnoreModule UseMeaningfulName
+'@Folder "HashCells"
 Option Explicit
 
-Private Const LEN_MD5_HASH As Long = 32
-Private Const LEN_SHA256_HASH As Long = 64
-
-'@Description "Calculates the MD5 hash of the values in a range of cells."
-Public Function HashCellsMD5(ParamArray Range() As Variant) As Variant
-    Dim ConcatenatedHashes As String
-    Dim Cell As Range
-    Dim Item As Variant
-    
-    For Each Item In Range
-        If TypeOf Item Is Range Then
-            For Each Cell In Item.Cells
-                ConcatenatedHashes = ConcatenatedHashes & StringToMD5(CStr(Cell.Value2))
-            Next Cell
-        Else
-            ConcatenatedHashes = ConcatenatedHashes & StringToMD5(CStr(Item))
-        End If
-    Next Item
-    
-    If Len(ConcatenatedHashes) > LEN_MD5_HASH Then
-        ConcatenatedHashes = StringToMD5(ConcatenatedHashes)
+'@Description "Calculates the SHA1 hash of a parameter array of Ranges."
+'@EntryPoint
+Public Function HashCellsSHA1(ParamArray Range() As Variant) As Variant
+Attribute HashCellsSHA1.VB_Description = "Calculates the SHA1 hash of a parameter array of Ranges."
+    Static Hasher As Object
+    If Hasher Is Nothing Then
+        Set Hasher = New SHA1Hasher
     End If
     
-    HashCellsMD5 = ConcatenatedHashes
+    HashCellsSHA1 = HashRangesGeneric(Hasher, Range)
 End Function
 
-'@Description "Calculates the SHA256 hash of the values in a range of cells."
+'@Description "Calculates the SHA256 hash of a parameter array of Ranges."
+'@EntryPoint
 Public Function HashCellsSHA256(ParamArray Range() As Variant) As Variant
-    Dim ConcatenatedHashes As String
-    Dim Cell As Range
-    Dim Item As Variant
+Attribute HashCellsSHA256.VB_Description = "Calculates the SHA256 hash of a parameter array of Ranges."
+    Static Hasher As Object
+    If Hasher Is Nothing Then
+        Set Hasher = New SHA256Hasher
+    End If
     
-    For Each Item In Range
-        If TypeOf Item Is Range Then
-            For Each Cell In Item.Cells
-                ConcatenatedHashes = ConcatenatedHashes & StringToSHA256(CStr(Cell.Value2))
-            Next Cell
+    HashCellsSHA256 = HashRangesGeneric(Hasher, Range)
+End Function
+
+'@Description "Calculates the MD5 hash of a parameter array of Ranges."
+'@EntryPoint
+Public Function HashCellsMD5(ParamArray Range() As Variant) As Variant
+Attribute HashCellsMD5.VB_Description = "Calculates the MD5 hash of a parameter array of Ranges."
+    Static Hasher As Object
+    If Hasher Is Nothing Then
+        Set Hasher = New MD5Hasher
+    End If
+    
+    HashCellsMD5 = HashRangesGeneric(Hasher, Range)
+End Function
+
+Private Function HashRangesGeneric(ByVal Hasher As IHasher, ByVal Range As Variant) As Variant
+    Dim Hashes() As String
+    ReDim Hashes(0 To UBound(Range))
+    
+    Dim i As Long
+    For i = 0 To UBound(Range)
+        If IsEmpty(Range(i)) Then
+            Hashes(i) = Hasher.ComputeHash(Chr$(0))
         Else
-            ConcatenatedHashes = ConcatenatedHashes & StringToSHA256(CStr(Item))
+            Hashes(i) = HashRangeGeneric(Hasher, Range(i))
         End If
-    Next Item
-    
-    If Len(ConcatenatedHashes) > LEN_SHA256_HASH Then
-        ConcatenatedHashes = StringToSHA256(ConcatenatedHashes)
-    End If
-    
-    HashCellsSHA256 = ConcatenatedHashes
-End Function
-
-Private Function StringToMD5(ByVal Value As String) As String
-    Static HashingObject As Object
-    If HashingObject Is Nothing Then
-        Set HashingObject = CreateObject("System.Security.Cryptography.MD5CryptoServiceProvider")
-    End If
-    
-    Dim BytesToEncode() As Byte
-    BytesToEncode = StrConv(Value, vbFromUnicode)
-
-    Dim EncodedBytes() As Byte
-    EncodedBytes = HashingObject.ComputeHash_2((BytesToEncode))
-    
-    Dim Result As String
-    Dim i As Long
-    For i = 0 To UBound(EncodedBytes)
-        Result = Result & Right$("0" & Hex$(AscB(MidB$(EncodedBytes, i + 1, 1))), 2)
     Next i
     
-    StringToMD5 = Result
+    HashRangesGeneric = Hasher.ComputeHash(Join$(Hashes, vbNullString))
 End Function
 
-Private Function StringToSHA256(ByVal Value As String) As String
-    Static HashingObject As Object
-    If HashingObject Is Nothing Then
-        Set HashingObject = CreateObject("System.Security.Cryptography.SHA256Managed")
-    End If
+Private Function HashRangeGeneric(ByVal Hasher As IHasher, ByVal Range As Range) As String
+    Dim vv As Variant
+    vv = Range.Value2
     
-    Dim BytesToEncode() As Byte
-    BytesToEncode = StrConv(Value, vbFromUnicode)
-
-    Dim EncodedBytes() As Byte
-    EncodedBytes = HashingObject.ComputeHash_2((BytesToEncode))
+    Dim TotalHashes As Long
+    TotalHashes = (((Range.Columns.Count * 2) + 1) * Range.Rows.Count) + 1
     
-    Dim Result As String
-    Dim i As Long
-    For i = 0 To UBound(EncodedBytes)
-        Result = Result & Right$("0" & Hex$(AscB(MidB$(EncodedBytes, i + 1, 1))), 2)
-    Next i
+    Dim Hashes() As Variant
+    ReDim Hashes(1 To TotalHashes)
     
-    StringToSHA256 = Result
-End Function
-
-Private Function BytesToBase64String(ByVal Bytes As Variant) As String
-    Static Base64Object As Object
-    If Base64Object Is Nothing Then
-        Set Base64Object = CreateObject("MSXML2.DOMDocument")
-        With Base64Object
-            .LoadXML "<ROOT/>"
-            .DocumentElement.DataType = "bin.base64"
-        End With
-    End If
+    Dim CurrentHash As Long
+    CurrentHash = 1
     
-    Base64Object.DocumentElement.NodeTypedValue = Bytes
+    Dim Row As Long
+    Dim Column As Long
+    For Row = 1 To Range.Rows.Count
+        For Column = 1 To Range.Columns.Count
+            Hashes(CurrentHash) = Hasher.ComputeHash(CStr(vv(Row, Column)))
+            Hashes(CurrentHash + 1) = Chr$(31)
+            CurrentHash = CurrentHash + 2
+        Next Column
+        
+        Hashes(CurrentHash) = Chr$(30)
+        CurrentHash = CurrentHash + 1
+    Next Row
+    Hashes(CurrentHash) = Chr$(29)
     
-    Dim Result As String
-    Result = Replace(Base64Object.DocumentElement.Text, vbLf, vbNullString)
-    
-    BytesToBase64String = Result
+    HashRangeGeneric = Hasher.ComputeHash(Join(Hashes, vbNullString))
 End Function
