@@ -1,4 +1,6 @@
-'@Folder "TableSplit.Helpers"
+Attribute VB_Name = "CollectionHelpers"
+'@IgnoreModule UseMeaningfulName, ProcedureNotUsed
+'@Folder "Helpers.Objects"
 Option Explicit
 
 '@Description "Returns True if the given Value exists in a Collection."

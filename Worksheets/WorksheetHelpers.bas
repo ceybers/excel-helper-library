@@ -1,4 +1,5 @@
-'@IgnoreModule ProcedureNotUsed
+Attribute VB_Name = "WorksheetHelpers"
+'@IgnoreModule UseMeaningfulName, ProcedureNotUsed
 '@Folder "Helpers"
 Option Explicit
 

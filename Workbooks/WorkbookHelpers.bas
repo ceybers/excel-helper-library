@@ -1,4 +1,5 @@
 Attribute VB_Name = "WorkbookHelpers"
+'@IgnoreModule UseMeaningfulName, ProcedureNotUsed
 '@Folder("HelperFunctions")
 Option Explicit
 
