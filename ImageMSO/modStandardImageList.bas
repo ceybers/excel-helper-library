@@ -1,28 +1,29 @@
-Attribute VB_Name = "modStandardImageList"
-'@Folder "HelperFunctions"
+Attribute VB_Name = "StandardImageList"
+'@Folder "Helpers.Controls"
 Option Explicit
 
-Public Function GetMSOImageList(Optional ByVal iconSize As Integer = 16) As ImageList
-    Set GetMSOImageList = New ImageList
+Private Const DEFAULT_ICON_SIZE As Long = 16
+Private Const DEFAULT_MSO_KEYS As String = "root,BlogHomePage;wb,FileSaveAsExcelXlsx;" & _
+    "ws,HeaderFooterSheetNameInsert;lo,CreateTable;col,TableColumnSelect;activeLo,TableSelect;" & _
+    "delete,Delete;AutoSum,AutoSum;MagicWand,QueryBuilder;TraceError,TraceError;" & _
+    "Tick,AcceptInvitation;Cross,DeclineInvitation;Key,AdpPrimaryKey;Fx,TableFormulaDialog;" & _
+    "Excel,MicrosoftExcel"
 
-    AddImageListImage GetMSOImageList, "root", "BlogHomePage", iconSize
-    AddImageListImage GetMSOImageList, "wb", "FileSaveAsExcelXlsx", iconSize
-    AddImageListImage GetMSOImageList, "ws", "HeaderFooterSheetNameInsert", iconSize
-    AddImageListImage GetMSOImageList, "lo", "CreateTable", iconSize
-    AddImageListImage GetMSOImageList, "col", "TableColumnSelect", iconSize
-    AddImageListImage GetMSOImageList, "activeLo", "TableSelect", iconSize
-    AddImageListImage GetMSOImageList, "delete", "Delete", iconSize
-    AddImageListImage GetMSOImageList, "AutoSum", "AutoSum", iconSize
-    AddImageListImage GetMSOImageList, "MagicWand", "QueryBuilder", iconSize
-    AddImageListImage GetMSOImageList, "TraceError", "TraceError", iconSize
-    AddImageListImage GetMSOImageList, "Tick", "AcceptInvitation", iconSize
-    AddImageListImage GetMSOImageList, "Cross", "DeclineInvitation", iconSize
-    AddImageListImage GetMSOImageList, "Key", "AdpPrimaryKey", iconSize
-    AddImageListImage GetMSOImageList, "Fx", "TableFormulaDialog", iconSize
-    AddImageListImage GetMSOImageList, "Excel", "MicrosoftExcel", iconSize
+'@Description "Returns a new ImageList object pre-populated with a standardised list of default icons."
+Public Function GetMSOImageList(Optional ByVal IconSize As Long = DEFAULT_ICON_SIZE) As ImageList
+    Dim Result As ImageList
+    Set Result = New ImageList
+    
+    Dim ImageTuple As Variant
+    For Each ImageTuple In Split(DEFAULT_MSO_KEYS, ";")
+        AddImageToImageList Result, Split(ImageTuple, ",")(0), Split(ImageTuple, ",")(1), IconSize
+    Next ImageTuple
+    
+    Set GetMSOImageList = Result
 End Function
 
-Private Sub AddImageListImage(ByVal il As ImageList, ByVal key As String, ByVal imageMso As String, ByVal iconSize As Integer)
-    il.ListImages.Add 1, key, Application.CommandBars.GetImageMso(imageMso, iconSize, iconSize)
+Private Sub AddImageToImageList(ByVal ImageList As ImageList, ByVal Key As String, ByVal ImageMso As String, ByVal IconSize As Long)
+    Dim Picture As IPictureDisp
+    Set Picture = Application.CommandBars.GetImageMso(ImageMso, IconSize, IconSize)
+    ImageList.ListImages.Add 1, Key, Picture
 End Sub
-
