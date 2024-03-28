@@ -1,4 +1,5 @@
 Attribute VB_Name = "RangeHelpers"
+'@IgnoreModule UseMeaningfulName, ProcedureNotUsed
 '@Folder("HelperFunctions")
 Option Explicit
 
