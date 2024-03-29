@@ -1,4 +1,9 @@
 # Array Helpers
+- ArrayFlatten - Input Variant(1 to n, 1 to 1) (e.g., 1-column wide Range `.Value2`), Output new (Variant 1 to n)
+- ArraySearch - Binary Search to find a Variant in a (m to n) array, or (m to n, 1 to x), searching in (i, 1)
+- ArraySort - QuickSort algorithm to sort an array in place. QuickSort two works on (m to n, 1 to 2) arrays, sorting on (i, n).
+
+# `ArrayHelpers.bas`
 ## ArrayToFilteredRange (method)
 ```vb
 Public Sub ArrayToFilteredRange(ByVal rng As Range, ByVal arr As Variant)
