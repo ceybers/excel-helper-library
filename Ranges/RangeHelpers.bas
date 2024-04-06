@@ -38,3 +38,19 @@ Public Sub AppendRange(ByVal rangeToAppend As Range, ByRef unionRange As Range)
     
     Set unionRange = Application.Union(unionRange, rangeToAppend)
 End Sub
+
+'@Description "Returns True if SpecialCells would have returned a Range. Returns False if no cells were selected."
+Public Function HasSpecialCells(ByVal Range As Range, ByVal CellType As XlCellType, _
+    Optional ByVal Value As XlSpecialCellsValue) As Boolean
+    If Range Is Nothing Then Exit Function
+
+    Dim Result As Range
+    On Error Resume Next
+    If Value = 0 Then
+        Set Result = Range.SpecialCells(CellType)
+    Else
+        Set Result = Range.SpecialCells(CellType, Value)
+    End If
+    
+    HasSpecialCells = (Not Result Is Nothing)
+End Function
