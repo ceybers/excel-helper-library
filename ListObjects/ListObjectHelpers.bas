@@ -17,6 +17,16 @@ Attribute GetAllListObjects.VB_Description = "Returns a Collection containing al
     Next Worksheet
 End Function
 
+Public Function TryGetListObjectFromCollection(ByVal TableCollection As Collection, ByVal ListObjectName As String, ByRef OutListObject As ListObject) As Boolean
+    Dim ListObject As ListObject
+    For Each ListObject In Collection
+        If ListObjectName = ListObject.Name Then
+            Set OutListObject = ListObject
+            TryGetListObjectFromCollection = True
+            Exit Function
+        End If
+    Next ListObject
+End Function
 
 ' DEPREC
 Public Function ZZZHasListColumn(ByVal ListObject As ListObject, ByVal ListColumnName As String) As Boolean
