@@ -59,6 +59,11 @@ Private Function HashRangeGeneric(ByVal Hasher As IHasher, ByVal Range As Range)
     Dim vv As Variant
     vv = Range.Value2
     
+    If Not IsArray(vv) Then
+        HashRangeGeneric = Hasher.ComputeHash(CStr(vv))
+        Exit Function
+    End If
+    
     Dim TotalHashes As Long
     TotalHashes = (((Range.Columns.Count * 2) + 1) * Range.Rows.Count) + 1
     
