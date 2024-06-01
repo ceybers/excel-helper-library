@@ -1,23 +1,27 @@
 Attribute VB_Name = "Main"
+'@IgnoreModule ProcedureNotUsed, IndexedDefaultMemberAccess
 '@Folder("VBAProject")
 Option Explicit
 
-Public Sub AAA()
+'@EntryPoint
+Public Sub RunIndexedTable()
     Dim ListObject As ListObject
-    Set ListObject = ThisWorkbook.Worksheets.Item(1).ListObjects.Item(1)
+    Set ListObject = ActiveSheet.ListObjects.Item(1)
     
-    ' Test Start
-    ListObject.DataBodyRange.Cells(2, 3) = "C3"
-    
+    ' Create IndexedTable object
     Dim TestIndexedTable As IndexedTable
     Set TestIndexedTable = New IndexedTable
-    TestIndexedTable.Load ListObject, "a"
+    TestIndexedTable.Load ListObject, "Key Column"
     
-    ' Do Test
-    Debug.Print TestIndexedTable("A3", "c")
-    TestIndexedTable("A3", "c") = "zzz"
-    Debug.Print TestIndexedTable("A3", "c")
+    Debug.Print "Value at 'A3' x 'Foo' is: "; TestIndexedTable("A3", "Foo")
     
-    ' Test Done
-    ListObject.DataBodyRange.Cells(2, 3) = "C3"
+    Debug.Print "Setting value at 'A3' x 'Foo' to 'zzz'"
+    TestIndexedTable("A3", "Foo") = "zzz"
+       
+    Dim Result As Variant
+    If Not TestIndexedTable.TryGetValue("A3", "Foo", Result) Then Exit Sub
+    Debug.Print "Value at 'A3' x 'Foo' is now: "; Result
+    
+    Debug.Print "Change the background color of 'A3' x 'Foo' to green"
+    TestIndexedTable.Range("A3", "Foo").Interior.Color = vbGreen
 End Sub
