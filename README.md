@@ -6,6 +6,7 @@ There are many like it, but this one is mine.
 - [CollectionEx](Collections/CollectionEx.md)
 - [DebugEx](DebugEx/DebugEx.md)
 - [ImageMSO Viewer](ImageMSO/ImageMSOViewer.md)
+- [IndexedTable](IndexedTable/IndexedTable.md)
 - [Lambdas](Lambdas/Lambdas.md)
 - [MVVM (basic implementation)](MVVM/MVVM.md)
 - [Persistent Workbook Storage](PersistentStorage/PersistentStorage.md)
