@@ -10,7 +10,6 @@ There are many like it, but this one is mine.
 - [Lambdas](Lambdas/Lambdas.md)
 - [MVVM (basic implementation)](MVVM/MVVM.md)
 - [Persistent Workbook Storage](PersistentStorage/PersistentStorage.md)
-- [User Defined Functions](UDFs/UDFs.md)
 
 ## Helper modules for Objects
 - [Array helpers](Arrays/ArrayHelpers.md)
@@ -29,7 +28,16 @@ There are many like it, but this one is mine.
 ## Toolbar Utilities
 - [Merge Cell Contents](Utilities/MergeCellContents/MergeCellContents.md)
 - [Chart Color from Data Source](Utilities/ChartColorFromDataSource/ChartColorFromDataSource.md)
+- [User Defined Functions](UDFs/UDFs.md)
 
 # Miscellaneous
 - [Dev Notes](TODO/DevNotes.md)
-- [Namespace Convention](TODO/NamespaceConvention.md)
+- [~~Namespace Convention~~](TODO/NamespaceConvention.md)
+
+# Other Repositories
+- [Excel Table Transfer Tool](https://github.com/ceybers/excel-table-transfer)
+- [Column State Manager](https://github.com/ceybers/excel-column-manager)
+- [Persistent Sort Manager](https://github.com/ceybers/excel-persistent-sort)
+- [Column Validation and Conditional Formatter](https://github.com/ceybers/excel-status-column)
+- [Table Split by Columns](https://github.com/ceybers/excel-table-split-column)
+- [Regex Preview Tool](https://github.com/ceybers/excel-regex-tool)
