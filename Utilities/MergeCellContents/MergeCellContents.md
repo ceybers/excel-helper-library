@@ -20,3 +20,8 @@ Unlike the built-in Merge feature, this will preserve the contents of all the ce
 - If the top-most cell is a formula, it will be replaced by a constant.
 - Multiple selections in the same column that do not overlap, e.g., `A1:A3` and `A10:A13` will merge into the top-most cell in each selection, i.e., `A1` and `A10`. They will not all merge into `A1` even though they are in the same column.
 - Cells containing errors will be converted into strings with their error code. e.g., `#NA` will be converted to the string `Error 2024` and `#NAME` will be converted to `Error 2029`.
+
+## Entry Point
+```vb
+ChartColorFromDataSource()
+```

@@ -26,6 +26,10 @@ There are many like it, but this one is mine.
 - [ListView helpers](ListView/ListViewHelpers.md)
 - TreeView helpers
 
+## Toolbar Utilities
+- [Merge Cell Contents](Utilities/MergeCellContents/MergeCellContents.md)
+- [Chart Color from Data Source](Utilities/ChartColorFromDataSource/ChartColorFromDataSource.md)
+
 # Miscellaneous
 - [Dev Notes](TODO/DevNotes.md)
 - [Namespace Convention](TODO/NamespaceConvention.md)
