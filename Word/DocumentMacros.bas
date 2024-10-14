@@ -1,4 +1,3 @@
-'@Folder("Project")
 Option Explicit
 
 '@Description "Removes all headers and footers in a document."
