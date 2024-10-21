@@ -1,3 +1,6 @@
+Option Explicit
+
+'@EntryPoint
 Public Sub GetEmailAddressFromMeeting()
     If Application.ActiveInspector Is Nothing Then Exit Sub
     If Not TypeOf Application.ActiveInspector.CurrentItem Is AppointmentItem Then Exit Sub
@@ -5,14 +8,22 @@ Public Sub GetEmailAddressFromMeeting()
     Dim AppointmentItem As AppointmentItem
     Set AppointmentItem = Application.ActiveInspector.CurrentItem
 
-    Debug.Print "Subject: "; AppointmentItem.Subject
-    Debug.Print "Time: "; AppointmentItem.Start; " to "; AppointmentItem.End
-    Debug.Print vbNullString
+    Dim RecipientCount As Long
+    RecipientCount = AppointmentItem.Recipients.Count
 
-    Dim Recipient As Recipient
-    For Each Recipient In AppointmentItem.Recipients
-        Debug.Print Recipient.Name; " <"; GetSmtpAddress(Recipient); ">"
-    Next Recipient
+    Dim Output() as String
+    ReDim Output(1 to 3 + RecipientCount)
+
+    Output(1) = "Subject: " & AppointmentItem.Subject
+    Output(2) = "Time: " & AppointmentItem.Start & " to " & AppointmentItem.End
+    Output(3) = "Recipients:" & RecipientCount
+
+    Dim i as Long
+    For i = 1 To RecipientCount
+        Output(3 + i) = Recipient.Name & " <" & GetSmtpAddress(Recipient) & ">"
+    Next i
+
+    Debug.Print Join$(Output, vbCrLf)
 End Sub
 
 Private Function GetSmtpAddress(ByVal Recipient As Recipient) As String
