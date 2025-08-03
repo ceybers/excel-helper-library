@@ -112,3 +112,57 @@ Checks if the provided variant exists in the array.
 - -1 means no match
 - -2 means a blank (string "") was provided
 - -3 means an error was provided
+
+## New Unsorted (August 2025)
+### IsTwoDimensionalOneBasedArray
+Returns True if InputArray is a 2-dimensional array with one-based indexes.
+```vb
+IsTwoDimensionalOneBasedArray(InputArray As Variant) As Boolean
+```
+
+### Unique
+Returns a 1-dimensional array that contains all the unique values in the InputArray. Not particularly performant. Lacks error handling for edge cases.
+```vb
+Unique(InputArray As Variant) As Variant
+```
+
+### `ArrayTransform.bas`
+```vb
+' Transforms a 2-dimensional array of shape (many, one) into a 1-dimensional array.
+' Useful for .Value2 of a Range that is 1-column wide.
+'    (1 to m, 1 to 1) to (1 to m)
+ColumnToArray(InputArray As Variant) As Variant
+
+' Transforms a 2-dimensional array of shape (one, many) into a 1-dimensional array.
+' Useful for .Value2 of a Range that is 1-row tall.
+'    (1 to 1, 1 to m) to (1 to m)
+RowToArray(InputArray As Variant) As Variant
+
+' Transforms a 1-dimensional array into a 2-dimensional array of of shape (one, many).
+' Useful for preparing an array to be placed into the .Value2 of a Range that is 1-column wide.
+'    (1 to m) to (1 to m, 1 to 1)
+ArrayToColumn(InputArray As Variant) As Variant
+
+' Transforms a 1-dimensional array into a 2-dimensional array of of shape (many, one).
+' Useful for preparing an array to be placed into the .Value2 of a Range that is 1-row tall.
+'    (1 to m) to (1 to 1, 1 to m)
+ArrayToRow(InputArray As Variant) As Variant
+
+' Transforms a 1-dimensional zero-based array into a one-based array.
+'    (0 to n) to (1 to n+1)
+ZeroBasedToOne(InputArray As Variant) As Variant
+
+' Transforms a 1-dimensional one-based array into a zero-based array.
+'    (1 to n) to (0 to n-1)
+OneBasedToZero(InputArray As Variant) As Variant
+
+' Transpose a 2-dimensional array.
+Transpose(InputArray As Variant) As Variant
+
+' Returns a 2-dimensional array of size (1 to 1, 1 to 1) when the input is a single variant.
+' If input is already an array, returns the same array.
+ForceTwoDimensional(InputVariant As Variant) As Variant
+
+' Returns a collection containing the items in a 1-dimensional array. Key is not set.
+ToCollection(InputArray As Variant) As Collection
+```
