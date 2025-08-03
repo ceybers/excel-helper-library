@@ -27,3 +27,9 @@ Tests if a given string is a valid Worksheet name.
 ```vb
 IsValidWorksheetName(SheetName As String) As Boolean
 ```
+
+## GetWorksheetDatabodyRange
+Returns the range of cells in a Worksheet starting from the first row beneath the header row ranging until the last row in the Used Range. Assumes header row is always Row 1. Returns Nothing if there are no rows.
+```vb
+GetWorksheetDatabodyRange(Worksheet As Worksheet) As Range
+```
