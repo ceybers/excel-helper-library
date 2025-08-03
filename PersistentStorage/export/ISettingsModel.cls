@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '@IgnoreModule ProcedureNotUsed
 '@Interface
-'@Folder "PersistentStorage.Abstract"
+'@Folder "Libraries.PersistentStorage.Abstract"
 Option Explicit
 
 '@Description "Gets the Settings object for the user-level settings."

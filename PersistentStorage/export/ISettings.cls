@@ -7,8 +7,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'@IgnoreModule ProcedureNotUsed
 '@Interface
-'@Folder "PersistentStorage.Abstract"
+'@Folder "Libraries.PersistentStorage.Abstract"
 Option Explicit
 
 '@Description "Gets/sets a boolean value for the given Flag name."

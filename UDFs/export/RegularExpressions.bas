@@ -1,5 +1,6 @@
 Attribute VB_Name = "RegularExpressions"
-'@Folder("VBAProject")
+'@IgnoreModule ProcedureNotUsed
+'@Folder "Helpers.RegEx"
 Option Explicit
 
 Private Const TOKEN_OUTPUT_PATTERN As String = "\$(\d+)"
@@ -62,4 +63,3 @@ Private Function GetRegExpObject(ByVal GlobalFlag As Boolean, ByVal MultiLine As
         If Pattern <> vbNullString Then .Pattern = Pattern
     End With
 End Function
-
